@@ -1,0 +1,69 @@
+<div class="body-color">
+    <div class="container">
+        <h1>Stock Details</h1>
+    
+        <div class="amount-display">${{principal}}</div>
+    
+        <div class="navbar">
+          <button (click)="showMarket()">Market</button>
+          <button (click)="showPortfolio()">Portfolio</button>
+        </div>
+    
+        <div class="navbar-next">
+          <h1>stock</h1>
+        </div>
+        
+        <div class="container-sub">
+          <div class="chart">
+          <canvas #trendChart></canvas>
+          </div>
+      
+          <!-- <table>
+            <thead>
+              <tr>
+                <th>Stock information</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let stock of stocks">
+                <td><a [routerLink]="['/stock', stock.stockId]">{{ stock.stockId }}</a></td>
+                <td><a [routerLink]="['/stock', stock.stockId]">{{ stock.stockName }}</a></td>
+                <td>{{ stock.currentPrice }}</td>
+                <td [ngStyle]="{ color: stock.rateOfReturn > 0 ? 'red' : 'green' }">{{ stock.rateOfReturn }}</td>
+                <td [ngStyle]="{ color: stock.profits > 0 ? 'red' : 'green' }">{{ stock.profits }}</td>
+              </tr>
+            </tbody>
+          </table> -->
+          <div class="stock-information">
+
+            <div class="trading-container">
+              <button *ngIf="shouldShowSellButton" class="trading-button" (click)="openSellModal()">Sell</button>
+              <button  class="trading-button" (click)="openBuyModal()">Buy</button>
+            </div>
+
+            <table>
+              <tr>
+                <td>Fluctuation Rate <span class="align-right">0.13</span></td>
+                <td>Max Price<span class="align-right">0.13</span></td>
+              </tr>
+              <tr>
+                <td>Fluctuation Price<span class="align-right">0.13</span></td>
+                <td>Min Prince<span class="align-right">0.13</span></td>
+              </tr>
+              <tr>
+                <td rowspan="2" class="special-td">
+                  <p>Volume</p>
+                  <p>150</p>
+                </td>
+                <td>Current Price<span class="align-right">0.13</span></td>
+              </tr>
+              <tr>
+                <td>Current Interest Rate<span class="align-right">0.13</span></td>
+              </tr>
+          </table>
+        </div>
+      </div>
+  
+     
+    </div>
+  </div>

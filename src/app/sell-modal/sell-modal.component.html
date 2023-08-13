@@ -1,0 +1,10 @@
+<div class="confirmation-dialog-container ">
+    <h2 confirmation-dialog-content>Please input the sale number</h2>
+    <div>
+    <input type="number" [(ngModel)]="quantity" placeholder="Enter quantity">
+    </div>
+    <div class="confirmation-dialog-actions">
+    <button class="confirmation-dialog-button" (click)="confirm()">Confirm</button>
+    <button class="confirmation-dialog-button" (click)="cancel()">Cancel</button>
+    </div>
+<div>

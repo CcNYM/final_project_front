@@ -1,0 +1,40 @@
+<div class="body-color">
+    <div class="container">
+      <h1 id="title">Result</h1>
+
+     
+  
+      <!-- <div class="navbar">
+        <button (click)="showMarket()">Market</button>
+        <button (click)="showPortfolio()">Portfolio</button>
+      </div> -->
+
+      <div class="navbar-next">
+        <h1>Sell Complete !</h1>
+      </div>
+      
+      <div class="container-sub">
+        <table>
+            <thead>
+            <tr>
+                <th>Total Value</th>
+                <th>Benefit from</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr >
+                <td>{{ res.totalValue }}</td>
+                <td [ngStyle]="{ color: res.benefits > 0 ? 'red' : 'green' }">{{ res.benefits }}</td>
+
+                
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="amount-display">principal:${{res.principal}}</div>
+      </div>
+      <div class="continue-button-container">
+        <button id="continueButton" (click)="continue()">Continue</button>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,40 @@
+<div class="body-color">
+  <div class="container">
+    <h1>Market</h1>
+
+    <div class="amount-display">$5000</div>
+
+    <div class="navbar">
+      <button (click)="showMarket()">Market</button>
+      <button (click)="showPortfolio()">Portfolio</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Stock ID</th>
+          <th>Stock Name</th>
+          <th>Current Price</th>
+          <th>Price Fluctuation</th>
+          <th>Fluctuation Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of stocks">
+          <td><a [routerLink]="['/stock', stock.stockId]">{{ stock.stockId }}</a></td>
+          <td><a [routerLink]="['/stock', stock.stockId]">{{ stock.stockName }}</a></td>
+          <!-- <td>{{ stock.stockId }}</td>
+          <td>{{ stock.stockName }}</td> -->
+          <td>{{ stock.currentPrice }}</td>
+          <!-- <td [ngClass]="{'positive': stock.priceFluctuation > 0, 'negative': stock.priceFluctuation < 0}">{{ stock.priceFluctuation }}</td>
+          <td [ngClass]="{'positive': stock.fluctuationRate > 0, 'negative': stock.fluctuationRate < 0}">{{ stock.fluctuationRate }}</td> -->
+          <td [ngStyle]="{ color: stock.priceFluctuation > 0 ? 'red' : 'green' }">{{ stock.priceFluctuation }}</td>
+          <td [ngStyle]="{ color: stock.fluctuationRate > 0 ? 'red' : 'green' }">{{ stock.fluctuationRate }}</td>
+          
+        </tr>
+      </tbody>
+    </table>
+
+  
+  </div>
+</div>
