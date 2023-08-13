@@ -34,7 +34,7 @@ export class SellModalComponent {
         
       // 关闭模态框并导航到 sellComplete 页面
       this.dialogRef.close();
-      this.router.navigate(['/stock/:stockId']);
+      this.router.navigate(["/sellComplete"]);
     }
     else {
       alert('Invalid input. Please enter a valid quantity.');
