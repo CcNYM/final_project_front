@@ -46,8 +46,7 @@ export class SellModalComponent {
           reject();
         },
       });
-  });
-     
+    });
   }
 
 

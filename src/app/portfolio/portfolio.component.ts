@@ -14,6 +14,8 @@ export class PortfolioComponent implements OnInit{
 
   principle: number = 0;
   stocks: Portfolio[] = [];
+  public shouldShowSellButton: boolean = false;
+  
 
   constructor(
     private router: Router,
@@ -22,24 +24,52 @@ export class PortfolioComponent implements OnInit{
     ) {}
 
   
-  ngOnInit(): void{
-      this.loadPrinciple(1);
-      this.loadPortfolio(1);
+  async ngOnInit(){
+      await this.loadPrinciple(1);
+      await this.loadPortfolio(1);
+      if (this.stocks.length != 0){
+        this.shouldShowSellButton = true
+      }
+
+      console.log(this.shouldShowSellButton)
   }
 
-  loadPrinciple(userId: number): void{
-    this.userService.getUserPrincipleHoldings(userId).subscribe({
-      next: (principle: number) => (this.principle = principle),
-      error: (error) => console.error('Error occured' + error),
+  async loadPrinciple(userId: number){
+      return new Promise((resolve, reject) =>{
+      this.userService.getUserPrincipleHoldings(userId).subscribe({
+        next: async (principle: number) => {
+          this.principle = principle
+          resolve(reject)
+        },
+        error: async (error) => {
+          console.error('Error occured' + error)
+          reject()
+        }
+      })
     })
-  }
+  } 
 
-  loadPortfolio(userId: number): void{
+  async loadPortfolio(userId: number){
+    return new Promise((resolve, reject) =>{
     this.userService.getPortfolioList(userId).subscribe({
-      next: (stocks: Portfolio[]) => (this.stocks = stocks),
-      error: (error) => console.error('Error occured' + error),
+      next: async (stocks: Portfolio[]) => {
+        this.stocks = stocks
+        resolve(reject)
+      },
+      error: async (error) => {
+        console.error('Error occured' + error)
+        reject()
+      }
     })
-  }
+  })
+} 
+
+  // async loadPortfolio(userId: number){
+  //   this.userService.getPortfolioList(userId).subscribe({
+  //     next: (stocks: Portfolio[]) => (this.stocks = stocks),
+  //     error: (error) => console.error('Error occured' + error),
+  //   })
+  // }
 
   showMarket() {
     // 处理显示市场的逻辑

@@ -35,8 +35,8 @@
         </tbody>
       </table>
   
-      <div class="sell-button-container">
-        <button id="sellButton" (click)="openConfirmationDialog()">Sell All</button>
+      <div class="sell-button-container" *ngIf="shouldShowSellButton">
+        <button id="sellButton"  (click)="openConfirmationDialog()">Sell All</button>
       </div>
     </div>
   </div>
