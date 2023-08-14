@@ -9,17 +9,14 @@ import { SellServiceService } from './sell-service.service';
 })
 export class SellCompleteComponent {
 
-  sellData:any;
-
   constructor(private router: Router, private sellService: SellServiceService) {
     this.sellData = this.sellService.sellData;
     console.log(this.sellData);
   }
 
-  res = { totalValue: 1200, benefits: 100, principal:5000}
+  sellData:any;
+  transactionRes = this.sellService.trainsactionRes
 
-
-  
 
   continue() {
     // 处理显示市场的逻辑

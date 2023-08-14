@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TransactionRes } from '../domain/trainsactionRes';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class SellServiceService {
 
   sellData: any;
+  trainsactionRes: any;
 
   constructor() { }
 }
