@@ -1,5 +1,5 @@
 
-import { Router } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 // import { Component, OnInit } from '@angular/core';
@@ -7,7 +7,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { SellModalComponent } from '../sell-modal/sell-modal.component';
 import { BuyModalComponent } from '../buy-modal/buy-modal.component';
 import { HttpClient } from '@angular/common/http';
-import { SingleStockDetail } from '../api-service/domain/singleStockDetail';
+import { SingleStockDetail } from '../api-service/domain/SingleStockDetail';
 import { PriceTrend } from '../api-service/domain/PriceTrend';
 import { StockdetailApiService } from '../api-service/stockdetail-api.service';
 
@@ -18,14 +18,18 @@ import { StockdetailApiService } from '../api-service/stockdetail-api.service';
   styleUrls: ['./stock.component.scss']
 })
 export class StockComponent  implements AfterViewInit{
+
   constructor(private router: Router,private dialog: MatDialog, private stockDetailService: StockdetailApiService, 
     private singleStockDetail: SingleStockDetail,
     private priceTrend: PriceTrend) {
+
     this.canvasRef = {} as ElementRef<HTMLCanvasElement>;
   }
 
   principal = 5000
   currentPrice = 10
+  stockId = 0
+  volume = 150
 
   shouldShowSellButton = true
 
@@ -34,6 +38,23 @@ export class StockComponent  implements AfterViewInit{
     { stockId: 2, stockName: 'XYZ', currentPrice: 200, rateOfReturn: -0.1, profits: -7 },
     { stockId: 3, stockName: 'DEF', currentPrice: 150, rateOfReturn: 0, profits: 0 }
   ];
+
+  ngOnInit(): void {
+    // TODO 6 ngOnInit implementation
+    this.route.params.subscribe((params) => {
+      if (params['stockId']>0) {
+        this.stockId = params['stockId']
+      }
+    });
+
+    this.stockDetailService.getSingleStockDetatil().subscribe(
+      data => {this.singleStockDetail = data;
+      });
+
+    this.stockDetailService.getWeelyTrendDetail().subscribe(
+      data => {this.priceTrend = data;
+      });
+  }
 
   showMarket() {
     // 处理显示市场的逻辑
@@ -51,7 +72,7 @@ export class StockComponent  implements AfterViewInit{
     // dialogConfig.disableClose = true;
     // dialogConfig.autoFocus = true;
     // dialogConfig.panelClass = 'confirmation-dialog-container';
-    dialogConfig.data = { principal:this.principal, currentPrice:this.currentPrice };
+    dialogConfig.data = { volume:this.volume, stockId : this.stockId };
   
     const dialogRef = this.dialog.open(SellModalComponent, dialogConfig);
 
@@ -74,7 +95,7 @@ export class StockComponent  implements AfterViewInit{
     // dialogConfig.disableClose = true;
     // dialogConfig.autoFocus = true;
     // dialogConfig.panelClass = 'confirmation-dialog-container';
-    dialogConfig.data = { volume: 150 };
+    dialogConfig.data = { principal:this.principal , currentPrice:this.currentPrice, stockId:this.stockId };
   
     const dialogRef = this.dialog.open(BuyModalComponent, dialogConfig);
 
@@ -194,15 +215,6 @@ export class StockComponent  implements AfterViewInit{
 
 
   
-  ngOnInit(): void {
-    this.stockDetailService.getSingleStockDetatil().subscribe(
-      data => {this.singleStockDetail = data;
-      });
-
-    this.stockDetailService.getWeelyTrendDetail().subscribe(
-      data => {this.priceTrend = data;
-      });
-  }
 }
 
 

@@ -4,6 +4,7 @@ import { MarketComponent } from './market/market.component';
 import { StockComponent } from './stock/stock.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { SellCompleteComponent } from './sell-complete/sell-complete.component';
+import { HttpClientModule } from "@angular/common/http";
 
 const routes: Routes = [
   {path:'sellComplete',component:SellCompleteComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),HttpClientModule],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

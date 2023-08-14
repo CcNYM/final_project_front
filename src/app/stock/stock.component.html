@@ -41,26 +41,30 @@
               <button  class="trading-button" (click)="openBuyModal()">Buy</button>
             </div>
 
-            <table>
-              <tr>
-                <td>Fluctuation Rate <span class="align-right">0.13</span></td>
-                <td>Max Price<span class="align-right">0.13</span></td>
-              </tr>
-              <tr>
-                <td>Fluctuation Price<span class="align-right">0.13</span></td>
-                <td>Min Prince<span class="align-right">0.13</span></td>
-              </tr>
-              <tr>
-                <td rowspan="2" class="special-td">
-                  <p>Volume</p>
-                  <p>150</p>
-                </td>
-                <td>Current Price<span class="align-right">0.13</span></td>
-              </tr>
-              <tr>
-                <td>Current Interest Rate<span class="align-right">0.13</span></td>
-              </tr>
-          </table>
+            <div *ngIf="singleStockDetail">
+              <table>
+                    <tr>
+                      <td>Fluctuation Rate <span class="align-right">0.13</span></td>
+                      <td>Max Price<span class="align-right">0.13</span></td>
+                    </tr>
+                    <tr>
+                      <td>Fluctuation Price<span class="align-right">0.13</span></td>
+                      <td>Min Prince<span class="align-right">0.13</span></td>
+                    </tr>
+                    <tr>
+                      <td rowspan="2" class="special-td">
+                      <p>Volume</p>
+                      <p>150</p>
+                      </td>
+                      <td>Current Price<span class="align-right">0.13</span></td>
+                  </tr>
+                  <tr>
+                    <td>Current Interest Rate<span class="align-right">0.13</span></td>
+                  </tr>
+              </table>
+
+            </div>
+            
         </div>
       </div>
   
