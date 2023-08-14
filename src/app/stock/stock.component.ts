@@ -6,6 +6,11 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { SellModalComponent } from '../sell-modal/sell-modal.component';
 import { BuyModalComponent } from '../buy-modal/buy-modal.component';
+import { HttpClient } from '@angular/common/http';
+import { SingleStockDetail } from '../api-service/domain/singleStockDetail';
+import { PriceTrend } from '../api-service/domain/PriceTrend';
+import { StockdetailApiService } from '../api-service/stockdetail-api.service';
+
 
 @Component({
   selector: 'app-stock',
@@ -13,8 +18,9 @@ import { BuyModalComponent } from '../buy-modal/buy-modal.component';
   styleUrls: ['./stock.component.scss']
 })
 export class StockComponent  implements AfterViewInit{
-
-  constructor(private router: Router,private dialog: MatDialog) {
+  constructor(private router: Router,private dialog: MatDialog, private stockDetailService: StockdetailApiService, 
+    private singleStockDetail: SingleStockDetail,
+    private priceTrend: PriceTrend) {
     this.canvasRef = {} as ElementRef<HTMLCanvasElement>;
   }
 
@@ -184,6 +190,18 @@ export class StockComponent  implements AfterViewInit{
       const x = 50 + i * xAxisInterval;
       ctx.fillText(xAxisLabels[i], x, canvas.height - 20);
     }
+  }
+
+
+  
+  ngOnInit(): void {
+    this.stockDetailService.getSingleStockDetatil().subscribe(
+      data => {this.singleStockDetail = data;
+      });
+
+    this.stockDetailService.getWeelyTrendDetail().subscribe(
+      data => {this.priceTrend = data;
+      });
   }
 }
 
