@@ -9,6 +9,7 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { SellCompleteComponent } from './sell-complete/sell-complete.component';
@@ -33,7 +34,8 @@ import { BuyModalComponent } from './buy-modal/buy-modal.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

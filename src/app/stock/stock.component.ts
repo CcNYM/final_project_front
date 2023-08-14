@@ -1,5 +1,5 @@
 
-import { Router } from '@angular/router';
+import { ActivatedRoute,Router,Params } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 // import { Component, OnInit } from '@angular/core';
@@ -12,13 +12,19 @@ import { BuyModalComponent } from '../buy-modal/buy-modal.component';
   templateUrl: './stock.component.html',
   styleUrls: ['./stock.component.scss']
 })
-export class StockComponent  implements AfterViewInit{
+export class StockComponent  implements AfterViewInit,OnInit{
+  stockId: number = 0;
+  principal: number = 0;
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => this.stockId = params['stockId']);
+    console.log(this.stockId);
+  }
 
-  constructor(private router: Router,private dialog: MatDialog) {
+  constructor(private router: Router,private route: ActivatedRoute,private dialog: MatDialog) {
     this.canvasRef = {} as ElementRef<HTMLCanvasElement>;
   }
 
-  principal = 5000
+  
   currentPrice = 10
 
   shouldShowSellButton = true
