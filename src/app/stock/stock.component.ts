@@ -1,4 +1,3 @@
-
 import { ActivatedRoute,Router,Params } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
@@ -15,17 +14,16 @@ import { BuyModalComponent } from '../buy-modal/buy-modal.component';
 export class StockComponent  implements AfterViewInit,OnInit{
   stockId: number = 0;
   principal: number = 0;
-  ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => this.stockId = params['stockId']);
-    console.log(this.stockId);
-  }
 
-  constructor(private router: Router,private route: ActivatedRoute,private dialog: MatDialog) {
+
+  constructor(private router: Router,private dialog: MatDialog,private route: ActivatedRoute) {
     this.canvasRef = {} as ElementRef<HTMLCanvasElement>;
   }
 
   
   currentPrice = 10
+  
+  volume = 150
 
   shouldShowSellButton = true
 
@@ -34,6 +32,15 @@ export class StockComponent  implements AfterViewInit,OnInit{
     { stockId: 2, stockName: 'XYZ', currentPrice: 200, rateOfReturn: -0.1, profits: -7 },
     { stockId: 3, stockName: 'DEF', currentPrice: 150, rateOfReturn: 0, profits: 0 }
   ];
+
+  ngOnInit(): void {
+    // TODO 6 ngOnInit implementation
+    this.route.params.subscribe((params) => {
+      if (params['stockId']>0) {
+        this.stockId = params['stockId']
+      }
+    });
+  }
 
   showMarket() {
     // 处理显示市场的逻辑
@@ -51,7 +58,7 @@ export class StockComponent  implements AfterViewInit,OnInit{
     // dialogConfig.disableClose = true;
     // dialogConfig.autoFocus = true;
     // dialogConfig.panelClass = 'confirmation-dialog-container';
-    dialogConfig.data = { principal:this.principal, currentPrice:this.currentPrice };
+    dialogConfig.data = { volume:this.volume, stockId : this.stockId };
   
     const dialogRef = this.dialog.open(SellModalComponent, dialogConfig);
 
@@ -74,7 +81,7 @@ export class StockComponent  implements AfterViewInit,OnInit{
     // dialogConfig.disableClose = true;
     // dialogConfig.autoFocus = true;
     // dialogConfig.panelClass = 'confirmation-dialog-container';
-    dialogConfig.data = { volume: 150 };
+    dialogConfig.data = { principal:this.principal , currentPrice:this.currentPrice, stockId:this.stockId };
   
     const dialogRef = this.dialog.open(BuyModalComponent, dialogConfig);
 

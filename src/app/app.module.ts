@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { SellCompleteComponent } from './sell-complete/sell-complete.component';
@@ -37,7 +38,7 @@ import { BuyModalComponent } from './buy-modal/buy-modal.component';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

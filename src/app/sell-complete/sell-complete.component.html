@@ -23,15 +23,14 @@
             </thead>
             <tbody>
             <tr >
-                <td>{{ res.totalValue }}</td>
-                <td [ngStyle]="{ color: res.benefits > 0 ? 'red' : 'green' }">{{ res.benefits }}</td>
-
+                <td>{{ transactionRes.totalValue }}</td>
+                <td [ngStyle]="{ color: transactionRes.benefit > 0 ? 'red' : 'green' }">{{ transactionRes.benefit }}</td>
                 
             </tr>
             </tbody>
         </table>
 
-        <div class="amount-display">principal:${{res.principal}}</div>
+        <div class="amount-display">principal:${{transactionRes.principal}}</div>
       </div>
       <div class="continue-button-container">
         <button id="continueButton" (click)="continue()">Continue</button>
