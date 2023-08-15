@@ -1,5 +1,4 @@
 
-  
   .body-color {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2; /* 设置页面背景色为灰色 */
@@ -7,6 +6,14 @@
     width: 50%; 
     padding-top: 50px;
     padding-bottom: 100px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.7); /* 添加容器阴影效果 */
+
+    // background: linear-gradient(45deg, #fb3 50%, #58a 0);    //让背景的渐变带有倾斜
+    // background-size:30px 30px;   //每一块小组成部分固定宽度和高度
+    background: linear-gradient(rgb(209, 213, 255) 30%,rgb(198, 237, 253) 70%);
+  
+
+ 
   }
 
   h1 {
@@ -33,38 +40,7 @@
     // opacity: 0.7; /* 调整透明度值（0-1之间）*/
   }
 
-  // .container::after {
-  //   content: "";
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   width: 100%;
-  //   height: 100%;
-  //   background-color: rgba(255, 255, 255, 0.5); /* 替换为你想要的背景不透明度 */
-  //   z-index: -1;
-  // }
-  
-
-  // .container::before {
-  //   content: "";
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   width: 100%;
-  //   height: 100%;
-  //   background-color: rgba(0, 0, 0, 0.8); /* 调整透明度值 */
-  //   z-index: -1; /* 确保位于背景图之上 */
-  // }
-  
-  // .overlay {
-  //   background-color: rgba(0, 0, 0, 0.1); /* 这里的最后一个数值0.5表示透明度，可以根据需要进行调整 */
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   width: 100%;
-  //   height: 100%;
-  //   z-index: -2; /* 调整为较小的值 */
-  // }
+ 
 
   .amount-display {
     box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* 添加容器阴影效果 */

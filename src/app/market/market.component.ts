@@ -12,12 +12,9 @@ import { Market } from '../domain/market';
 export class MarketComponent implements OnInit, OnDestroy{
   principle: number = 0;
   stocks: Market[] = [];
-<<<<<<< HEAD
-  backgroundImageUrl = '../../assets/background.jpg'; // 替换为你的背景图路径
-  opacityValue = 0; // 替换为你的透明度值
-=======
+
   timer: any;
->>>>>>> a7c8a6bdf4accbd844239c0dec601b8f8045f3d4
+
 
   constructor(
     private router: Router, 
