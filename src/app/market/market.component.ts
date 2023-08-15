@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserApiService } from '../api-service/user-api.service';
 import { RealTimeStockApiService } from '../api-service/real-time-stock-api.service';
@@ -9,9 +9,10 @@ import { Market } from '../domain/market';
   templateUrl: './market.component.html',
   styleUrls: ['./market.component.scss']
 })
-export class MarketComponent implements OnInit{
+export class MarketComponent implements OnInit, OnDestroy{
   principle: number = 0;
   stocks: Market[] = [];
+  timer: any;
 
   constructor(
     private router: Router, 
@@ -22,6 +23,14 @@ export class MarketComponent implements OnInit{
   ngOnInit(): void {
       this.loadPrinciple(1);
       this.loadMarket();
+      this.timer = setInterval(() => {
+        this.loadMarket();
+        console.log("+10s")
+      },10000)
+  }
+
+  ngOnDestroy(): void {
+      clearInterval(this.timer);
   }
 
   loadPrinciple(userId: number): void{
