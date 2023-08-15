@@ -100,6 +100,8 @@ export class SellModalComponent {
 
     const minQuantity = 1;
 
+    // alert(maxQuantity)
+
     // 检查输入的值是否超过限度
     if (this.quantity > maxQuantity || this.quantity < minQuantity){
       return false;

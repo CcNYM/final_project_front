@@ -45,8 +45,6 @@ export class StockComponent implements OnInit {
 
   currentPrice = 10
 
-  volume = 150
-
   shouldShowSellButton = true
 
   // stocks = [
@@ -97,7 +95,7 @@ export class StockComponent implements OnInit {
     // dialogConfig.disableClose = true;
     // dialogConfig.autoFocus = true;
     // dialogConfig.panelClass = 'confirmation-dialog-container';
-    dialogConfig.data = { volume: this.volume, stockId: this.stockId };
+    dialogConfig.data = { volume: this.singleStockDetail.holdingVolume, stockId: this.stockId };
 
     const dialogRef = this.dialog.open(SellModalComponent, dialogConfig);
 
