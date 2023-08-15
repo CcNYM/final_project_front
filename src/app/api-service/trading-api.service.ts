@@ -18,13 +18,22 @@ export class TradingApiService {
     return this.http.post<TransactionRes>("http://localhost:8080/stockTrading/trading",trainsactionList)
   }
 
-  // getShippers(): Observable<Shipper[]> {
-  //   return this.http.get<Shipper[]>("/api/shippers")
-  //     .pipe(
-  //       retry(3),
-  //       catchError(this.handleError),
-  //     );
+  // sellAll(){
+  //   return this.http.get<TransactionRes>("http://localhost:8080/stockTrading/trading",trainsactionList)
   // }
+
+  sellAll(): Observable<TransactionRes> {
+    return this.http.get<TransactionRes>("http://localhost:8080/stockTrading/sellAll")
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+      );
+  }
+  
+  private handleError(error: HttpErrorResponse) {
+    console.error('An error occurred:', error.error);
+    return throwError(() => new Error('Please try again later.'));
+  }
 
   // getShipper(id: number) {
   //   return this.http.get<Shipper>(`/api/shippers/${id}`)
