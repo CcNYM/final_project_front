@@ -88,12 +88,14 @@ export class BuyModalComponent {
 
   private isQuantityValid(): boolean {
     // 设置限度值
-    const maxQuantity = this.data.currentPrice * this.quantity;
+    const maxQuantity = this.data.principal;
 
     const minQuantity = 1;
 
+    // alert(this.data.principal+" "+this.data.currentPrice * this.quantity)
+
     // 检查输入的值是否超过限度
-    if (this.quantity > maxQuantity || this.quantity < minQuantity){
+    if (this.data.currentPrice * this.quantity > maxQuantity || this.quantity < minQuantity){
       return false;
     }
     else {

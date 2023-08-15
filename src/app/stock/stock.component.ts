@@ -118,7 +118,7 @@ export class StockComponent implements OnInit {
     // dialogConfig.disableClose = true;
     // dialogConfig.autoFocus = true;
     // dialogConfig.panelClass = 'confirmation-dialog-container';
-    dialogConfig.data = { principal: this.principal, currentPrice: this.currentPrice, stockId: this.stockId };
+    dialogConfig.data = { principal: this.singleStockDetail.holdingPrincipal, currentPrice: this.currentPrice, stockId: this.stockId };
 
     const dialogRef = this.dialog.open(BuyModalComponent, dialogConfig);
 
