@@ -14,7 +14,7 @@
 
     // background: linear-gradient(45deg, #fb3 50%, #58a 0);    //让背景的渐变带有倾斜
     // background-size:30px 30px;   //每一块小组成部分固定宽度和高度
-    background: linear-gradient(rgb(209, 213, 255) 30%,rgb(198, 237, 253) 70%);
+    background: linear-gradient(rgb(254, 232, 255) 30%,rgb(233, 224, 255) 70%);
   }
 
   h1 {
@@ -32,7 +32,7 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.7); /* 添加容器阴影效果 */
     position: relative; /* 添加定位属性 */
 
-    background-image: url('../../assets/background.jpg');
+    background-image: url('../../assets/image4.jpg');
     background-color: rgba(255, 255, 255, 0.9); 
     background-size: cover;
     background-position: center;
@@ -81,13 +81,18 @@
   .navbar-next {
     // display: flex;
     // justify-content: flex-start;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
     text-align: center; /* 将文本内容居中对齐 */
     margin-bottom: 5px;
-    background-color: rgba(169, 116, 255, 0.5); /* 设置金额栏背景色为白色 */
+    background-color: rgba(146, 116, 255, 0.7); /* 设置金额栏背景色为白色 */
     padding: 1px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* 添加容器阴影效果 */
-    font-size: 10px;
+    width: auto;
   }
   
   .navbar button:hover {
@@ -114,6 +119,7 @@
     padding: 10px;
     text-align: left;
     border: 1px solid #ddd;
+    width: 220px
    
   }
 

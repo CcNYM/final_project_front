@@ -69,7 +69,9 @@ export class BuyModalComponent {
         
       // 关闭模态框并导航到 stock/:stockId 页面
       this.dialogRef.close();
-      this.router.navigate(['/stock', this.data.stockId]);
+      this.router.navigate(['/stock', this.data.stockId]).then(() => {
+        window.location.reload();
+      });
 
       alert('Purchase successful');
     }
