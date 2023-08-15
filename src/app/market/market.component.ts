@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserApiService } from '../api-service/user-api.service';
 import { RealTimeStockApiService } from '../api-service/real-time-stock-api.service';
@@ -9,11 +9,15 @@ import { Market } from '../domain/market';
   templateUrl: './market.component.html',
   styleUrls: ['./market.component.scss']
 })
-export class MarketComponent implements OnInit{
+export class MarketComponent implements OnInit, OnDestroy{
   principle: number = 0;
   stocks: Market[] = [];
+<<<<<<< HEAD
   backgroundImageUrl = '../../assets/background.jpg'; // 替换为你的背景图路径
   opacityValue = 0; // 替换为你的透明度值
+=======
+  timer: any;
+>>>>>>> a7c8a6bdf4accbd844239c0dec601b8f8045f3d4
 
   constructor(
     private router: Router, 
@@ -24,6 +28,14 @@ export class MarketComponent implements OnInit{
   ngOnInit(): void {
       this.loadPrinciple(1);
       this.loadMarket();
+      this.timer = setInterval(() => {
+        this.loadMarket();
+        console.log("+10s")
+      },10000)
+  }
+
+  ngOnDestroy(): void {
+      clearInterval(this.timer);
   }
 
   loadPrinciple(userId: number): void{

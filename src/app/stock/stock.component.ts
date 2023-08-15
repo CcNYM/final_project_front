@@ -1,45 +1,84 @@
-import { ActivatedRoute,Router,Params } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 // import { Component, OnInit } from '@angular/core';
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { SellModalComponent } from '../sell-modal/sell-modal.component';
 import { BuyModalComponent } from '../buy-modal/buy-modal.component';
+import { HttpClient } from '@angular/common/http';
+import { SingleStockDetail } from '../domain/singleStockDetail';
+import { PriceTrend } from '../domain/priceTrend';
+import { StockdetailApiService } from '../api-service/stockdetail-api.service';
+
 
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
   styleUrls: ['./stock.component.scss']
 })
-export class StockComponent  implements AfterViewInit,OnInit{
+export class StockComponent implements OnInit {
   stockId: number = 0;
   principal: number = 0;
+  priceTrend: PriceTrend = { priceList: [] };
+  singleStockDetail: SingleStockDetail = {
+    holdingVolume: 0,
+    stockName: "",
+    holdingPrincipal: 0,
+    fluctuationRate: 0,
+    fluctuationPrice: 0,
+    maxPrice: 0,
+    minPrice: 0,
+    currentPrice: 0,
+    currentInterestRate: 0
+  };
 
 
-  constructor(private router: Router,private dialog: MatDialog,private route: ActivatedRoute) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private dialog: MatDialog,
+    private stockDetailService: StockdetailApiService,
+  ) {
     this.canvasRef = {} as ElementRef<HTMLCanvasElement>;
   }
 
-  
+
   currentPrice = 10
-  
+
   volume = 150
 
   shouldShowSellButton = true
 
-  stocks = [
-    { stockId: 1, stockName: 'ABC', currentPrice: 100, rateOfReturn: 0.3, profits: 26 },
-    { stockId: 2, stockName: 'XYZ', currentPrice: 200, rateOfReturn: -0.1, profits: -7 },
-    { stockId: 3, stockName: 'DEF', currentPrice: 150, rateOfReturn: 0, profits: 0 }
-  ];
+  // stocks = [
+  //   { stockId: 1, stockName: 'ABC', currentPrice: 100, rateOfReturn: 0.3, profits: 26 },
+  //   { stockId: 2, stockName: 'XYZ', currentPrice: 200, rateOfReturn: -0.1, profits: -7 },
+  //   { stockId: 3, stockName: 'DEF', currentPrice: 150, rateOfReturn: 0, profits: 0 }
+  // ];
 
   ngOnInit(): void {
     // TODO 6 ngOnInit implementation
     this.route.params.subscribe((params) => {
-      if (params['stockId']>0) {
+      if (params['stockId'] > 0) {
         this.stockId = params['stockId']
       }
     });
+    this.loadStockDetail();
+    this.loadWeeklyTrend();
+  }
+
+
+  loadStockDetail(): void {
+    this.stockDetailService.getSingleStockDetatil(1, this.stockId).subscribe({
+      next: (singlestockdetail: SingleStockDetail) => (this.singleStockDetail = singlestockdetail),
+      error: (error) => (console.error('Error occured' + error)),
+    })
+  }
+
+  loadWeeklyTrend(): void {
+    this.stockDetailService.getWeelyTrendDetail(this.stockId).subscribe({
+      next: (weeklytrend: PriceTrend) => (this.priceTrend = weeklytrend),
+      error: (error) => (console.error('Error occured' + error)),
+    })
   }
 
   showMarket() {
@@ -58,11 +97,11 @@ export class StockComponent  implements AfterViewInit,OnInit{
     // dialogConfig.disableClose = true;
     // dialogConfig.autoFocus = true;
     // dialogConfig.panelClass = 'confirmation-dialog-container';
-    dialogConfig.data = { volume:this.volume, stockId : this.stockId };
-  
+    dialogConfig.data = { volume: this.volume, stockId: this.stockId };
+
     const dialogRef = this.dialog.open(SellModalComponent, dialogConfig);
 
-    
+
 
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.confirm) {
@@ -81,11 +120,11 @@ export class StockComponent  implements AfterViewInit,OnInit{
     // dialogConfig.disableClose = true;
     // dialogConfig.autoFocus = true;
     // dialogConfig.panelClass = 'confirmation-dialog-container';
-    dialogConfig.data = { principal:this.principal , currentPrice:this.currentPrice, stockId:this.stockId };
-  
+    dialogConfig.data = { principal: this.principal, currentPrice: this.currentPrice, stockId: this.stockId };
+
     const dialogRef = this.dialog.open(BuyModalComponent, dialogConfig);
 
-    
+
 
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.confirm) {
@@ -97,7 +136,7 @@ export class StockComponent  implements AfterViewInit,OnInit{
       }
     });
   }
-  
+
 
   // openConfirmationDialog(): void {
   //   const dialogConfig = new MatDialogConfig();
@@ -106,9 +145,9 @@ export class StockComponent  implements AfterViewInit,OnInit{
   //   // dialogConfig.panelClass = 'confirmation-dialog-container';
   //   dialogConfig.data = { message: 'Do you confirm the sale?' };
   //   dialogConfig.position = { top: '20%' };
-  
+
   //   const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
-  
+
   //   dialogRef.afterClosed().subscribe(result => {
   //     if (result === true) {
   //       // 用户确认销售
@@ -152,13 +191,13 @@ export class StockComponent  implements AfterViewInit,OnInit{
     ctx.moveTo(canvas.width - 50, 0);
     ctx.lineTo(canvas.width - 50, canvas.height - 30);
     ctx.stroke();
-  
+
 
     // 绘制 y 轴标签
     ctx.fillStyle = 'black';
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
-    const yAxisMaxValue = Math.max(...data)+30;
+    const yAxisMaxValue = Math.max(...data) + 30;
     const yAxisInterval = Math.ceil(yAxisMaxValue / 5);
     for (let i = 0; i <= yAxisMaxValue; i += yAxisInterval) {
       const y = canvas.height - 30 - i * (canvas.height - 30) / yAxisMaxValue;
@@ -198,6 +237,9 @@ export class StockComponent  implements AfterViewInit,OnInit{
       ctx.fillText(xAxisLabels[i], x, canvas.height - 20);
     }
   }
+
+
+
 }
 
 
