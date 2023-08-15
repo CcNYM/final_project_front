@@ -19,18 +19,60 @@
     max-width: 800px; /* 设置容器最大宽度 */
     width: 80%; /* 设置容器宽度为页面宽度的80% */
     padding: 20px;
-    background-color: #ffffff; /* 设置容器背景色为白色 */
+    // background-color: #ffffff; /* 设置容器背景色为白色 */
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加容器阴影效果 */
     position: relative; /* 添加定位属性 */
+
+    background-image: url('../../assets/background.jpg');
+    background-color: rgba(255, 255, 255, 0.9); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    // background-color: rgba(0, 0, 0, 0.1);
+    position: relative;
+    // opacity: 0.7; /* 调整透明度值（0-1之间）*/
   }
+
+  // .container::after {
+  //   content: "";
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   background-color: rgba(255, 255, 255, 0.5); /* 替换为你想要的背景不透明度 */
+  //   z-index: -1;
+  // }
   
+
+  // .container::before {
+  //   content: "";
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   background-color: rgba(0, 0, 0, 0.8); /* 调整透明度值 */
+  //   z-index: -1; /* 确保位于背景图之上 */
+  // }
+  
+  // .overlay {
+  //   background-color: rgba(0, 0, 0, 0.1); /* 这里的最后一个数值0.5表示透明度，可以根据需要进行调整 */
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   z-index: -2; /* 调整为较小的值 */
+  // }
+
   .amount-display {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加容器阴影效果 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* 添加容器阴影效果 */
     position: absolute;
     top: 15px;
     right: 20px;
     padding: 10px;
-    background-color: rgb(198, 247, 194); /* 设置金额栏背景色为白色 */
+    background-color: rgb(198, 247, 194,0.7); /* 设置金额栏背景色为白色 */
     border: 1px solid #ddd;
     border-radius: 4px;
     font-weight: bold;
@@ -41,9 +83,10 @@
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 20px;
-    background-color: #EAF6FF;
+    background-color: rgb(201, 242, 255,0.5); /* 设置金额栏背景色为白色 */
+    // background-color: #EAF6FF;
     padding: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加容器阴影效果 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* 添加容器阴影效果 */
   }
   
   .navbar button {
@@ -73,6 +116,7 @@
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* 添加容器阴影效果 */
   }
   
   th, td {
@@ -83,13 +127,13 @@
   }
   
   th {
-    background-color: #f2f2f2;
+    background-color: rgba(111, 130, 241, 0.5); /* 设置金额栏背景色为白色 */
     font-weight: bold;
   }
   
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
+  // tr:nth-child(even) {
+  //   background-color: #f9f9f9;
+  // }
 
   .positive {
     background-color: rgb(91, 206, 91);

@@ -12,6 +12,8 @@ import { Market } from '../domain/market';
 export class MarketComponent implements OnInit{
   principle: number = 0;
   stocks: Market[] = [];
+  backgroundImageUrl = '../../assets/background.jpg'; // 替换为你的背景图路径
+  opacityValue = 0; // 替换为你的透明度值
 
   constructor(
     private router: Router, 
