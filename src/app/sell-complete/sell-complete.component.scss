@@ -1,6 +1,7 @@
 #title {
     text-align: center;
     font-family: 'Lato', sans-serif;
+    font-weight: bold;
   }
   
   .body-color {
@@ -9,7 +10,10 @@
     margin: auto; 
     width: 50%; 
     padding-top: 50px;
-    padding-bottom: 100px;
+    padding-bottom: 70px;
+    padding-right: 0 px;
+    padding-left: 0 px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.7); /* 添加容器阴影效果 */
     background: linear-gradient(rgb(204, 234, 255) 30%,rgb(206, 255, 231) 70%);
   }
 
@@ -21,7 +25,7 @@
     width: 80%; /* 设置容器宽度为页面宽度的80% */
     padding: 20px;
     background-color: #ffffff; /* 设置容器背景色为白色 */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加容器阴影效果 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.7); /* 添加容器阴影效果 */
     position: relative; /* 添加定位属性 */
 
     background-image: url('../../assets/image3.jpg');
@@ -61,6 +65,7 @@
     font-weight: bold;
     margin-bottom: 50px;
     margin-right: 200px;
+    font-size: 16px;
   }
 
   .navbar-next {
@@ -86,6 +91,7 @@
     padding: 10px;
     text-align: left;
     border: 1px solid #ddd;
+    font-size: 16px;
   }
   
   th {
@@ -105,8 +111,9 @@
   }
 
   #continueButton {
+    
     float: right;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加容器阴影效果 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* 添加容器阴影效果 */
     width: 120px;
     height: 35px;
     font-size: 18px;

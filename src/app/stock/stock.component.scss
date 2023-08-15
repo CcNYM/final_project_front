@@ -6,12 +6,21 @@
     margin: auto; 
     width: 50%; 
     padding-top: 50px;
-    padding-bottom: 100px;
+    padding-bottom: 70px;
+    padding-right: 0 px;
+    padding-left: 0 px;
+
+    box-shadow: 0 2px 4px rgba(0,0,0,0.7); /* 添加容器阴影效果 */
+
+    // background: linear-gradient(45deg, #fb3 50%, #58a 0);    //让背景的渐变带有倾斜
+    // background-size:30px 30px;   //每一块小组成部分固定宽度和高度
+    background: linear-gradient(rgb(209, 213, 255) 30%,rgb(198, 237, 253) 70%);
   }
 
   h1 {
     text-align: center;
     font-family: 'Lato', sans-serif;
+    font-weight: bold;
   }
   
   .container {
@@ -20,34 +29,44 @@
     width: 80%; /* 设置容器宽度为页面宽度的80% */
     padding: 20px;
     background-color: #ffffff; /* 设置容器背景色为白色 */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加容器阴影效果 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.7); /* 添加容器阴影效果 */
     position: relative; /* 添加定位属性 */
+
+    background-image: url('../../assets/background.jpg');
+    background-color: rgba(255, 255, 255, 0.9); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    // background-color: rgba(0, 0, 0, 0.1);
+    position: relative;
   }
   
   .amount-display {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加容器阴影效果 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* 添加容器阴影效果 */
     position: absolute;
     top: 15px;
     right: 20px;
     padding: 10px;
-    background-color: rgb(198, 247, 194); /* 设置金额栏背景色为白色 */
+    background-color: rgb(198, 247, 194,0.7); /* 设置金额栏背景色为白色 */
     border: 1px solid #ddd;
     border-radius: 4px;
     font-weight: bold;
+    font-size: 20px;
   }
   
   .navbar {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 15px;
-    background-color: #EAF6FF;
+    margin-bottom: 20px;
+    background-color: rgb(201, 242, 255,0.5); /* 设置金额栏背景色为白色 */
+    // background-color: #EAF6FF;
     padding: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加容器阴影效果 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* 添加容器阴影效果 */
   }
   
   .navbar button {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加容器阴影效果 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* 添加容器阴影效果 */
     margin-right: 10px;
     padding: 8px 16px;
     font-size: 14px;
@@ -56,6 +75,7 @@
     background-color: #4CAF50;
     color: white;
     cursor: pointer;
+    font-size: 18px;
   }
 
   .navbar-next {
@@ -64,9 +84,9 @@
     align-items: center;
     text-align: center; /* 将文本内容居中对齐 */
     margin-bottom: 5px;
-    background-color: #f57d6e;
+    background-color: rgba(169, 116, 255, 0.5); /* 设置金额栏背景色为白色 */
     padding: 1px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加容器阴影效果 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* 添加容器阴影效果 */
     font-size: 10px;
   }
   
@@ -94,6 +114,11 @@
     padding: 10px;
     text-align: left;
     border: 1px solid #ddd;
+   
+  }
+
+  .special-span {
+    font-weight: bold;
   }
 
   .align-right {
@@ -110,9 +135,13 @@
     background-color: #f2f2f2;
     font-weight: bold;
   }
+
+  .volume {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
   
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
+  tr:nth-child(odd) {
+    background-color: rgba(231, 218, 255, 0.5);
   }
 
   .positive {
@@ -183,12 +212,13 @@
     margin-left: 40px;
     margin-right: 40px;
     padding: 8px 30px;
-    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* 添加容器阴影效果 */
     border-radius: 4px;
     background-color: #7cd162;
     color: #fff;
     border: none;
     cursor: pointer;
+    font-size: 18px;
   }
   
   .trading-button:last-child {

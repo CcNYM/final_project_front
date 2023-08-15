@@ -6,13 +6,17 @@
     margin: auto; 
     width: 50%; 
     padding-top: 50px;
-    padding-bottom: 100px;
+    padding-bottom: 70px;
+    padding-right: 0 px;
+    padding-left: 0 px;
     background: linear-gradient(rgb(252, 234, 214) 30%,rgb(255, 250, 206) 70%);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.7); /* 添加容器阴影效果 */
   }
 
   h1 {
     text-align: center;
     font-family: 'Lato', sans-serif;
+    font-weight: bold;
   }
   
   .container {
@@ -21,7 +25,7 @@
     width: 80%; /* 设置容器宽度为页面宽度的80% */
     padding: 20px;
     background-color: #ffffff; /* 设置容器背景色为白色 */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加容器阴影效果 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.7); /* 添加容器阴影效果 */
     position: relative; /* 添加定位属性 */
 
     background-image: url('../../assets/image2.png');
@@ -41,6 +45,7 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     font-weight: bold;
+    font-size: 20px;
   }
   
   .navbar {
@@ -55,7 +60,7 @@
   }
   
   .navbar button {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加容器阴影效果 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* 添加容器阴影效果 */
     margin-right: 10px;
     padding: 8px 16px;
     font-size: 14px;
@@ -64,6 +69,7 @@
     background-color: #4CAF50;
     color: white;
     cursor: pointer;
+    font-size: 18px;
   }
   
   .navbar button:hover {
@@ -88,6 +94,7 @@
     padding: 10px;
     text-align: left;
     border: 1px solid #ddd;
+    font-size: 16px;
   }
   
   th {
@@ -112,6 +119,7 @@
   }
 
   .sell-button-container {
+    // box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* 添加容器阴影效果 */
     position: absolute;
     bottom: 2px;
     right: 10px;
@@ -119,10 +127,10 @@
 
   #sellButton {
     float: right;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加容器阴影效果 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* 添加容器阴影效果 */
     width: 120px;
     height: 35px;
-    font-size: 14px;
+    font-size: 18px;
     padding: 8px;
     margin: 10px;
     border: none;
