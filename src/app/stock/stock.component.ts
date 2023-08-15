@@ -1,5 +1,4 @@
-
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute,Router,Params } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 // import { Component, OnInit } from '@angular/core';
@@ -7,8 +6,8 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { SellModalComponent } from '../sell-modal/sell-modal.component';
 import { BuyModalComponent } from '../buy-modal/buy-modal.component';
 import { HttpClient } from '@angular/common/http';
-import { SingleStockDetail } from '../api-service/domain/SingleStockDetail';
-import { PriceTrend } from '../api-service/domain/PriceTrend';
+import { SingleStockDetail } from '../domain/singleStockDetail';
+import { PriceTrend } from '../domain/priceTrend';
 import { StockdetailApiService } from '../api-service/stockdetail-api.service';
 
 
@@ -17,27 +16,41 @@ import { StockdetailApiService } from '../api-service/stockdetail-api.service';
   templateUrl: './stock.component.html',
   styleUrls: ['./stock.component.scss']
 })
-export class StockComponent  implements AfterViewInit{
+export class StockComponent  implements OnInit{
+  stockId: number = 0;
+  principal: number = 0;
+  priceTrend: PriceTrend = {priceList: []};
+  singleStockDetail: SingleStockDetail = {holdingVolume: 0,
+    fluctuationRate: 0,
+    fluctuationPrice: 0,
+    maxPrice: 0,
+    minPrice: 0,
+    currentPrice: 0,
+    currentInterestRate: 0};
 
-  constructor(private router: Router,private dialog: MatDialog, private stockDetailService: StockdetailApiService, 
-    private singleStockDetail: SingleStockDetail,
-    private priceTrend: PriceTrend) {
 
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private dialog: MatDialog, 
+    private stockDetailService: StockdetailApiService, 
+    ) 
+  {
     this.canvasRef = {} as ElementRef<HTMLCanvasElement>;
   }
 
-  principal = 5000
+  
   currentPrice = 10
-  stockId = 0
+  
   volume = 150
 
   shouldShowSellButton = true
 
-  stocks = [
-    { stockId: 1, stockName: 'ABC', currentPrice: 100, rateOfReturn: 0.3, profits: 26 },
-    { stockId: 2, stockName: 'XYZ', currentPrice: 200, rateOfReturn: -0.1, profits: -7 },
-    { stockId: 3, stockName: 'DEF', currentPrice: 150, rateOfReturn: 0, profits: 0 }
-  ];
+  // stocks = [
+  //   { stockId: 1, stockName: 'ABC', currentPrice: 100, rateOfReturn: 0.3, profits: 26 },
+  //   { stockId: 2, stockName: 'XYZ', currentPrice: 200, rateOfReturn: -0.1, profits: -7 },
+  //   { stockId: 3, stockName: 'DEF', currentPrice: 150, rateOfReturn: 0, profits: 0 }
+  // ];
 
   ngOnInit(): void {
     // TODO 6 ngOnInit implementation
@@ -46,14 +59,23 @@ export class StockComponent  implements AfterViewInit{
         this.stockId = params['stockId']
       }
     });
+    this.loadStockDetail();
+    this.loadWeeklyTrend();
+  }
 
-    this.stockDetailService.getSingleStockDetatil().subscribe(
-      data => {this.singleStockDetail = data;
-      });
 
-    this.stockDetailService.getWeelyTrendDetail().subscribe(
-      data => {this.priceTrend = data;
-      });
+  loadStockDetail(): void{
+    this.stockDetailService.getSingleStockDetatil(1,this.stockId).subscribe({
+      next: (singlestockdetail: SingleStockDetail) => (this.singleStockDetail=singlestockdetail),
+      error: (error) => (console.error('Error occured' + error)),
+    })
+  }
+
+  loadWeeklyTrend(): void{
+    this.stockDetailService.getWeelyTrendDetail(this.stockId).subscribe({
+      next: (weeklytrend: PriceTrend) => (this.priceTrend = weeklytrend),
+      error: (error) => (console.error('Error occured' + error)),
+    })
   }
 
   showMarket() {

@@ -1,3 +1,3 @@
 export interface PriceTrend{
-    priceList: string[];
+    priceList: number[];
 }

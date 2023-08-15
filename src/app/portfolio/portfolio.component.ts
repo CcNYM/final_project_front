@@ -1,22 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { Portfolio } from '../domain/portfolio';
+import { UserApiService } from '../api-service/user-api.service';
 
 @Component({
   selector: 'app-portfolio',
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss']
 })
-export class PortfolioComponent {
+export class PortfolioComponent implements OnInit{
 
-  constructor(private router: Router,private dialog: MatDialog) {}
+  principle: number = 0;
+  stocks: Portfolio[] = [];
 
-  stocks = [
-    { stockId: 1, stockName: 'ABC', currentPrice: 100, rateOfReturn: 0.3, profits: 26 },
-    { stockId: 2, stockName: 'XYZ', currentPrice: 200, rateOfReturn: -0.1, profits: -7 },
-    { stockId: 3, stockName: 'DEF', currentPrice: 150, rateOfReturn: 0, profits: 0 }
-  ];
+  constructor(
+    private router: Router,
+    private userService: UserApiService,
+    private dialog: MatDialog
+    ) {}
+
+  
+  ngOnInit(): void{
+      this.loadPrinciple(1);
+      this.loadPortfolio(1);
+  }
+
+  loadPrinciple(userId: number): void{
+    this.userService.getUserPrincipleHoldings(userId).subscribe({
+      next: (principle: number) => (this.principle = principle),
+      error: (error) => console.error('Error occured' + error),
+    })
+  }
+
+  loadPortfolio(userId: number): void{
+    this.userService.getPortfolioList(userId).subscribe({
+      next: (stocks: Portfolio[]) => (this.stocks = stocks),
+      error: (error) => console.error('Error occured' + error),
+    })
+  }
 
   showMarket() {
     // 处理显示市场的逻辑

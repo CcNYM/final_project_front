@@ -2,7 +2,7 @@
     <div class="container">
       <h1>Portfolio</h1>
 
-      <div class="amount-display">$5000</div>
+      <div class="amount-display">${{principle}}</div>
   
       <div class="navbar">
         <button (click)="showMarket()">Market</button>
@@ -28,7 +28,7 @@
             <td>{{ stock.currentPrice }}</td>
             <!-- <td [ngClass]="{'positive': stock.priceFluctuation > 0, 'negative': stock.priceFluctuation < 0}">{{ stock.priceFluctuation }}</td>
             <td [ngClass]="{'positive': stock.fluctuationRate > 0, 'negative': stock.fluctuationRate < 0}">{{ stock.fluctuationRate }}</td> -->
-            <td [ngStyle]="{ color: stock.rateOfReturn > 0 ? 'red' : 'green' }">{{ stock.rateOfReturn }}</td>
+            <td [ngStyle]="{ color: stock.returnRates > 0 ? 'red' : 'green' }">{{ stock.returnRates }}</td>
             <td [ngStyle]="{ color: stock.profits > 0 ? 'red' : 'green' }">{{ stock.profits }}</td>
             
           </tr>
