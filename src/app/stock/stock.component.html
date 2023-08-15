@@ -2,7 +2,7 @@
     <div class="container">
         <h1>Stock Details</h1>
     
-        <div class="amount-display">${{principal}}</div>
+        <div class="amount-display">${{singleStockDetail.holdingPrincipal}}</div>
     
         <div class="navbar">
           <button (click)="showMarket()">Market</button>
@@ -10,7 +10,7 @@
         </div>
     
         <div class="navbar-next">
-          <h1>stock</h1>
+          <h1>{{singleStockDetail.stockName}}</h1>
         </div>
         
         <div class="container-sub">
@@ -48,7 +48,7 @@
                       <td>Max Price<span class="align-right">{{singleStockDetail.maxPrice}}</span></td>
                     </tr>
                     <tr>
-                      <td>Fluctuation Price<span class="align-right">{{singleStockDetail.fluctuationPrice}</span></td>
+                      <td>Fluctuation Price<span class="align-right">{{singleStockDetail.fluctuationPrice}}</span></td>
                       <td>Min Price<span class="align-right">{{singleStockDetail.minPrice}}</span></td>
                     </tr>
                     <tr>

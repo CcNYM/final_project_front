@@ -21,6 +21,8 @@ export class StockComponent  implements OnInit{
   principal: number = 0;
   priceTrend: PriceTrend = {priceList: []};
   singleStockDetail: SingleStockDetail = {holdingVolume: 0,
+    stockName: "",
+    holdingPrincipal: 0,
     fluctuationRate: 0,
     fluctuationPrice: 0,
     maxPrice: 0,
