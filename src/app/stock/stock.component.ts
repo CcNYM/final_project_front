@@ -70,7 +70,7 @@ export class StockComponent implements OnInit, OnDestroy {
       this.loadWeeklyTrend();
       this.offset = (this.offset+1)%this.xValues.length;
       console.log("+30s")
-    },30000)
+    },10000)
   }
 
   ngOnDestroy(): void {
@@ -87,7 +87,7 @@ export class StockComponent implements OnInit, OnDestroy {
 
   loadWeeklyTrend(): void {
     this.stockDetailService.getWeelyTrendDetail(this.stockId).subscribe({
-      next: (weeklytrend: number[]) => (this.priceTrend.priceList = weeklytrend, this.drawChart()),
+      next: (weeklytrend: number[]) => (this.priceTrend.priceList = weeklytrend ,this.drawChart()),
       error: (error) => (console.error('Error occured' + error)),
     })
   }
@@ -186,7 +186,7 @@ export class StockComponent implements OnInit, OnDestroy {
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 
     // 假设这是一些示例数据
-    const data = this.priceTrend.priceList;
+    const data = this.priceTrend.priceList.reverse();
     console.log(data);
 
     // 设置画布大小
@@ -242,7 +242,7 @@ export class StockComponent implements OnInit, OnDestroy {
     ctx.fillStyle = 'black';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
-    const xAxisLabels = this.xValues.slice(this.offset).concat(this.xValues.slice(0, this.offset));
+    const xAxisLabels = this.xValues.slice(this.offset % 7).concat(this.xValues.slice(0, this.offset % 7));
     const xAxisInterval = (canvas.width - 100) / (xAxisLabels.length - 1);
     for (let i = 0; i < xAxisLabels.length; i++) {
       const x = 50 + i * xAxisInterval;
