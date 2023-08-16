@@ -20,7 +20,7 @@ export class StockdetailApiService {
 
   getWeelyTrendDetail(stockId: number){
     return this.http
-    .get<PriceTrend>(`http://localhost:8080/stock-detail/getWeeklyTrendDetails/${stockId}`)
+    .get<number[]>(`http://localhost:8080/stock-detail/getWeeklyTrendDetails/${stockId}`)
     .pipe(retry(3),catchError(this.handleError));
   }
 

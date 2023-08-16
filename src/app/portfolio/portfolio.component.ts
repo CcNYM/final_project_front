@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
@@ -10,34 +10,43 @@ import { UserApiService } from '../api-service/user-api.service';
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss']
 })
-export class PortfolioComponent implements OnInit{
+export class PortfolioComponent implements OnInit, OnDestroy {
 
   principle: number = 0;
   stocks: Portfolio[] = [];
   stocksTemp:Portfolio[] = [];
   public shouldShowSellButton: boolean = false;
   searchKeyword: any;
-  
+
+  timer: any;
 
   constructor(
     private router: Router,
     private userService: UserApiService,
     private dialog: MatDialog
-    ) {}
+  ) { }
 
-  
-  async ngOnInit(){
-      await this.loadPrinciple(1);
-      await this.loadPortfolio(1);
-      if (this.stocks.length != 0){
-        this.shouldShowSellButton = true
-      }
 
-      console.log(this.shouldShowSellButton)
+  async ngOnInit() {
+    await this.loadPrinciple(1);
+    await this.loadPortfolio(1);
+    if (this.stocks.length != 0) {
+      this.shouldShowSellButton = true
+    }
+    this.timer = setInterval(() => {
+      this.loadPrinciple(1);
+      this.loadPortfolio(1);
+      console.log("+10s")
+    }, 10000)
+    //console.log(this.shouldShowSellButton)
   }
 
-  async loadPrinciple(userId: number){
-      return new Promise((resolve, reject) =>{
+  ngOnDestroy(): void {
+    clearInterval(this.timer);
+  }
+
+  async loadPrinciple(userId: number) {
+    return new Promise((resolve, reject) => {
       this.userService.getUserPrincipleHoldings(userId).subscribe({
         next: async (principle: number) => {
           this.principle = principle
@@ -49,7 +58,7 @@ export class PortfolioComponent implements OnInit{
         }
       })
     })
-  } 
+  }
 
   async loadPortfolio(userId: number){
     return new Promise((resolve, reject) =>{
@@ -95,9 +104,9 @@ export class PortfolioComponent implements OnInit{
     // dialogConfig.panelClass = 'confirmation-dialog-container';
     dialogConfig.data = { message: 'Do you confirm the sale?' };
     dialogConfig.position = { top: '20%' };
-  
+
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
         // 用户确认销售

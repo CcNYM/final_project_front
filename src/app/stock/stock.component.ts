@@ -2,7 +2,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 // import { Component, OnInit } from '@angular/core';
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { SellModalComponent } from '../sell-modal/sell-modal.component';
 import { BuyModalComponent } from '../buy-modal/buy-modal.component';
 import { HttpClient } from '@angular/common/http';
@@ -16,9 +16,12 @@ import { StockdetailApiService } from '../api-service/stockdetail-api.service';
   templateUrl: './stock.component.html',
   styleUrls: ['./stock.component.scss']
 })
-export class StockComponent implements OnInit {
+export class StockComponent implements OnInit, OnDestroy {
   stockId: number = 0;
   principal: number = 0;
+  timer: any;
+  offset: number = 0;
+  xValues: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   priceTrend: PriceTrend = { priceList: [] };
   singleStockDetail: SingleStockDetail = {
     holdingVolume: 0,
@@ -62,6 +65,16 @@ export class StockComponent implements OnInit {
     });
     this.loadStockDetail();
     this.loadWeeklyTrend();
+    this.timer = setInterval(() => {
+      this.loadStockDetail();
+      this.loadWeeklyTrend();
+      this.offset = (this.offset+1)%this.xValues.length;
+      console.log("+30s")
+    },30000)
+  }
+
+  ngOnDestroy(): void {
+      clearInterval(this.timer);
   }
 
 
@@ -74,7 +87,7 @@ export class StockComponent implements OnInit {
 
   loadWeeklyTrend(): void {
     this.stockDetailService.getWeelyTrendDetail(this.stockId).subscribe({
-      next: (weeklytrend: PriceTrend) => (this.priceTrend = weeklytrend),
+      next: (weeklytrend: number[]) => (this.priceTrend.priceList = weeklytrend, this.drawChart()),
       error: (error) => (console.error('Error occured' + error)),
     })
   }
@@ -173,7 +186,8 @@ export class StockComponent implements OnInit {
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 
     // 假设这是一些示例数据
-    const data = [100, 200, 150, 300, 250, 400, 350];
+    const data = this.priceTrend.priceList;
+    console.log(data);
 
     // 设置画布大小
     canvas.width = 300; // 调整为合适的宽度
@@ -228,7 +242,7 @@ export class StockComponent implements OnInit {
     ctx.fillStyle = 'black';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
-    const xAxisLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    const xAxisLabels = this.xValues.slice(this.offset).concat(this.xValues.slice(0, this.offset));
     const xAxisInterval = (canvas.width - 100) / (xAxisLabels.length - 1);
     for (let i = 0; i < xAxisLabels.length; i++) {
       const x = 50 + i * xAxisInterval;
