@@ -14,7 +14,9 @@ export class PortfolioComponent implements OnInit{
 
   principle: number = 0;
   stocks: Portfolio[] = [];
+  stocksTemp:Portfolio[] = [];
   public shouldShowSellButton: boolean = false;
+  searchKeyword: any;
   
 
   constructor(
@@ -54,6 +56,7 @@ export class PortfolioComponent implements OnInit{
     this.userService.getPortfolioList(userId).subscribe({
       next: async (stocks: Portfolio[]) => {
         this.stocks = stocks
+        this.stocksTemp = stocks
         resolve(reject)
       },
       error: async (error) => {
@@ -73,12 +76,16 @@ export class PortfolioComponent implements OnInit{
 
   showMarket() {
     // 处理显示市场的逻辑
-    this.router.navigate(['/market']);
+    this.router.navigate(['/market']).then(() => {
+      window.location.reload();
+    });;
   }
 
   showPortfolio() {
     // 处理显示投资组合的逻辑
-    this.router.navigate(['/portfolio']);
+    this.router.navigate(['/portfolio']).then(() => {
+      window.location.reload();
+    });;
   }
 
   openConfirmationDialog(): void {
@@ -100,5 +107,98 @@ export class PortfolioComponent implements OnInit{
         // 可以选择不执行任何操作或者添加其他关闭提示窗口的逻辑
       }
     });
+  }
+
+  searchByStockName() { 
+
+    let successFlag = false
+
+    for(let index=0 ; index < this.stocksTemp.length; index++) {
+        if (this.stocksTemp[index].stockName == this.searchKeyword)
+        {
+          this.stocks = [this.stocksTemp[index]]
+          successFlag = true
+          break;
+        }
+    }
+    if (successFlag == false && this.searchKeyword==null) {
+      alert("please input value!")
+    }
+    if (successFlag == false && this.searchKeyword!=null) {
+      alert("can't get the stock!")
+    }
+   
+  }
+  searchByStockId() {
+
+    let successFlag = false
+
+    for(let index=0 ; index < this.stocksTemp.length; index++) {
+        if (this.stocksTemp[index].stockId == this.searchKeyword)
+        {
+          this.stocks = [this.stocksTemp[index]]
+          successFlag = true
+          break;
+        }
+    }
+    if (successFlag == false && this.searchKeyword==null) {
+      alert("please input value!")
+    }
+    if (successFlag == false && this.searchKeyword!=null) {
+      alert("can't get the stock!")
+    }
+  }
+
+  sortPriceFlag=1
+  sortRateFlag=1
+  sortPriceName = "asc"
+  sortRateName = "asc"
+
+  sortPrice() {
+    if (this.sortPriceFlag == 1) {
+      this.sortPriceName = "des"
+      this.sortPriceAscending()
+      this.sortPriceFlag = 2
+    }
+    else if (this.sortPriceFlag == 2) {
+      this.sortPriceName = "asc"
+      this.sortPriceDescending()
+      this.sortPriceFlag = 1
+    }
+  }
+
+  sortRate() {
+    if (this.sortRateFlag == 1) {
+      this.sortRateName = "des"
+      this.sortRateAscending()
+      this.sortRateFlag = 2
+    }
+    else if (this.sortRateFlag == 2) {
+      this.sortRateName = "asc"
+      this.sortRateDescending()
+      this.sortRateFlag = 1
+    }
+  }
+ 
+
+  // sortRate
+  sortPriceAscending() {
+    // 执行升序排序逻辑
+    this.stocks.sort((a,b)=>a.currentPrice-b.currentPrice)
+  }
+
+  sortPriceDescending() {
+    // 执行降序排序逻辑
+    this.stocks.sort((a,b)=>b.currentPrice-a.currentPrice)
+  }
+
+  sortRateAscending() {
+    // 执行升序排序逻辑
+    this.stocks.sort((a,b)=>a.returnRates-b.returnRates)
+  }
+
+  sortRateDescending() {
+    // 执行降序排序逻辑
+    this.stocks.sort((a,b)=>b.returnRates-a.returnRates)
   }
 }

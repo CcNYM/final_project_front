@@ -8,14 +8,25 @@
         <button (click)="showMarket()">Market</button>
         <button (click)="showPortfolio()">Portfolio</button>
       </div>
+
+      <div class="searchBar">
+        <input type="text" [(ngModel)]="searchKeyword" placeholder="please input stockId or sockName">
+        <button class="searchButton" (click)="searchByStockName()">by name</button>
+        <button class="searchButton" (click)="searchByStockId()">by id</button>
+      <div>
+  
   
       <table>
         <thead>
           <tr>
             <th>Stock ID</th>
             <th>Stock Name</th>
-            <th>Current Price</th>
-            <th>Rate Of Return</th>
+            <th>Current Price
+              <button class = "sort-buttons" (click)="sortPrice()">{{sortPriceName}}</button>
+            </th>
+            <th>Rate Of Return
+              <button class = "sort-buttons" (click)="sortRate()">{{sortRateName}}</button>
+            </th>
             <th>Profits</th>
           </tr>
         </thead>

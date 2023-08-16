@@ -83,6 +83,7 @@
   }
   
   table {
+    margin-top: 20px;
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 50px;
@@ -150,3 +151,53 @@
     color: white; /* 按钮鼠标悬停时的文本颜色 */
   }
   
+  .sort-buttons {
+    background-color: rgba(228, 239, 255, 0.8); /* 设置金额栏背景色为白色 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* 添加容器阴影效果 */
+    border: none;
+  }
+
+  .sort-buttons:hover {
+    background-color: rgba(202, 180, 117, 0.8); /* 设置金额栏背景色为白色 */
+  }
+
+  .sort-buttons:active {
+    background-color: rgba(141, 106, 61, 0.8); /* 设置金额栏背景色为白色 */
+  }
+
+
+  .searchBar {
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 200px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* 添加容器阴影效果 */
+  }
+  
+  .searchButton {
+    padding: 8px 16px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(192, 146, 93, 0.8); /* 设置金额栏背景色为白色 */
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* 添加容器阴影效果 */
+  }
+  
+  .searchButton:hover {
+    background-color: rgba(196, 104, 68, 0.8); /* 设置金额栏背景色为白色 */
+  }
+
+  .searchButton:active {
+    background-color: rgba(128, 51, 28, 0.8); /* 设置金额栏背景色为白色 */
+  }
