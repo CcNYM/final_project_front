@@ -1,7 +1,6 @@
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-// import { Component, OnInit } from '@angular/core';
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { SellModalComponent } from '../sell-modal/sell-modal.component';
 import { BuyModalComponent } from '../buy-modal/buy-modal.component';
@@ -9,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { SingleStockDetail } from '../domain/singleStockDetail';
 import { PriceTrend } from '../domain/priceTrend';
 import { StockdetailApiService } from '../api-service/stockdetail-api.service';
+import { UserApiService } from '../api-service/user-api.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ import { StockdetailApiService } from '../api-service/stockdetail-api.service';
 })
 export class StockComponent implements OnInit, OnDestroy {
   stockId: number = 0;
-  principal: number = 0;
+  principle: number = 0;
   timer: any;
   offset: number = 0;
   xValues: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -41,6 +41,7 @@ export class StockComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private stockDetailService: StockdetailApiService,
+    private userService: UserApiService
   ) {
     this.canvasRef = {} as ElementRef<HTMLCanvasElement>;
   }
@@ -48,13 +49,7 @@ export class StockComponent implements OnInit, OnDestroy {
 
   currentPrice = 10
 
-  shouldShowSellButton = true
-
-  // stocks = [
-  //   { stockId: 1, stockName: 'ABC', currentPrice: 100, rateOfReturn: 0.3, profits: 26 },
-  //   { stockId: 2, stockName: 'XYZ', currentPrice: 200, rateOfReturn: -0.1, profits: -7 },
-  //   { stockId: 3, stockName: 'DEF', currentPrice: 150, rateOfReturn: 0, profits: 0 }
-  // ];
+  shouldShowSellButton = true   
 
   ngOnInit(): void {
     // TODO 6 ngOnInit implementation
@@ -63,13 +58,15 @@ export class StockComponent implements OnInit, OnDestroy {
         this.stockId = params['stockId']
       }
     });
+    this.loadPrinciple(1);
     this.loadStockDetail();
     this.loadWeeklyTrend();
     this.timer = setInterval(() => {
+      this.loadPrinciple(1);
       this.loadStockDetail();
       this.loadWeeklyTrend();
       this.offset = (this.offset+1)%this.xValues.length;
-      console.log("+30s")
+      console.log("+10s")
     },10000)
   }
 
@@ -77,6 +74,13 @@ export class StockComponent implements OnInit, OnDestroy {
       clearInterval(this.timer);
   }
 
+
+  loadPrinciple(userId: number): void{
+    this.userService.getUserPrincipleHoldings(userId).subscribe({
+      next: (principle: number) => (this.principle = principle),
+      error: (error) => console.error('Error occured' + error),
+    })
+  }
 
   loadStockDetail(): void {
     this.stockDetailService.getSingleStockDetatil(1, this.stockId).subscribe({
@@ -131,7 +135,7 @@ export class StockComponent implements OnInit, OnDestroy {
     // dialogConfig.disableClose = true;
     // dialogConfig.autoFocus = true;
     // dialogConfig.panelClass = 'confirmation-dialog-container';
-    dialogConfig.data = { principal: this.singleStockDetail.holdingPrincipal, currentPrice: this.currentPrice, stockId: this.stockId };
+    dialogConfig.data = { principal: this.principle, currentPrice: this.currentPrice, stockId: this.stockId };
 
     const dialogRef = this.dialog.open(BuyModalComponent, dialogConfig);
 
@@ -148,29 +152,6 @@ export class StockComponent implements OnInit, OnDestroy {
     });
   }
 
-
-  // openConfirmationDialog(): void {
-  //   const dialogConfig = new MatDialogConfig();
-  //   // dialogConfig.disableClose = true;
-  //   // dialogConfig.autoFocus = true;
-  //   // dialogConfig.panelClass = 'confirmation-dialog-container';
-  //   dialogConfig.data = { message: 'Do you confirm the sale?' };
-  //   dialogConfig.position = { top: '20%' };
-
-  //   const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result === true) {
-  //       // 用户确认销售
-  //       // 执行跳转到新页面的操作
-  //     } else {
-  //       // 用户取消销售
-  //       // 可以选择不执行任何操作或者添加其他关闭提示窗口的逻辑
-  //     }
-  //   });
-  // }
-
-  // stocks: any[] = []; // 假设这是你的股票数据
 
   @ViewChild('trendChart', { static: false }) canvasRef!: ElementRef<HTMLCanvasElement>;
 
