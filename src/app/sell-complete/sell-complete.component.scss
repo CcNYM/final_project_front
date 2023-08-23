@@ -14,7 +14,7 @@
     padding-right: 0 px;
     padding-left: 0 px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.7); /* 添加容器阴影效果 */
-    background: linear-gradient(rgb(204, 234, 255) 30%,rgb(206, 255, 231) 70%);
+    background: linear-gradient(rgb(252, 234, 214) 30%,rgb(255, 250, 206) 70%);
   }
 
 
@@ -28,7 +28,7 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.7); /* 添加容器阴影效果 */
     position: relative; /* 添加定位属性 */
 
-    background-image: url('../../assets/image3.jpg');
+    background-image: url('../../assets/sell.jpg');
     background-color: rgba(255, 255, 255, 0.9); 
     background-size: cover;
     background-position: center;
@@ -58,7 +58,7 @@
     // position: absolute;
     top: 15px;
     right: 20px;
-    padding: 10px;
+    padding: 30px;
     background-color: rgb(198, 247, 194,0.7); /* 设置金额栏背景色为白色 */
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -73,7 +73,7 @@
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 20px;
-    background-color: rgba(79, 161, 255, 0.5); 
+    background-color: rgba(255, 248, 190, 0.5); 
     padding: 1px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* 添加容器阴影效果 */
   }
@@ -95,7 +95,9 @@
   }
   
   th {
-    background-color: rgba(64, 133, 212, 0.5); 
+    background-color: rgba(255, 213, 165, 0.5);  /* 设置金额栏背景色为白色 */ /* 设置金额栏背景色为白色 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* 添加容器阴影效果 */
+    // background-color: #f2f2f2;
     font-weight: bold;
   }
   
@@ -121,18 +123,18 @@
     margin: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #4CAF50;
+    background-color: rgba(73, 141, 153, 0.8); /* 设置金额栏背景色为白色 */
     color: white;
     cursor: pointer;
   }
   
   #continueButton:hover {
-    background-color: #e95a50; /* 按钮鼠标悬停时的背景颜色 */
+    background-color: rgba(73, 141, 153, 0.8); /* 设置金额栏背景色为白色 */
     color: white; /* 按钮鼠标悬停时的文本颜色 */
   }
   
   #continueButton:active {
-    background-color: #c4372d; /* 按钮鼠标悬停时的背景颜色 */
+    background-color: rgba(38, 102, 110, 0.8); /* 设置金额栏背景色为白色 */
     color: white; /* 按钮鼠标悬停时的文本颜色 */
   }
   

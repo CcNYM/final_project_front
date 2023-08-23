@@ -28,7 +28,7 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.7); /* 添加容器阴影效果 */
     position: relative; /* 添加定位属性 */
 
-    background-image: url('../../assets/image2.png');
+    background-image: url('../../assets/portfolio.jpg');
     background-color: rgba(255, 255, 255, 0.9); 
     background-size: cover;
     background-position: center;
@@ -66,22 +66,20 @@
     font-size: 14px;
     border: none;
     border-radius: 4px;
-    background-color: #4CAF50;
+    background-color: rgba(85, 162, 224, 0.8);
     color: white;
     cursor: pointer;
     font-size: 18px;
   }
-  
   .navbar button:hover {
-    background-color: #d38769; /* 按钮鼠标悬停时的背景颜色 */
+    background-color:  rgba(128, 174, 218, 0.8); /* 按钮鼠标悬停时的背景颜色 */
     color: white; /* 按钮鼠标悬停时的文本颜色 */
   }
 
   .navbar button:active {
-    background-color: #a85838; /* 按钮鼠标悬停时的背景颜色 */
+    background-color: rgba(72, 105, 155, 0.8); /* 按钮鼠标悬停时的背景颜色 */
     color: white; /* 按钮鼠标悬停时的文本颜色 */
   }
-  
   table {
     margin-top: 20px;
     width: 100%;
@@ -99,7 +97,7 @@
   }
   
   th {
-    background-color: rgba(248, 182, 96, 0.5); /* 设置金额栏背景色为白色 */
+    background-color: rgba(255, 213, 165, 0.5);  /* 设置金额栏背景色为白色 */ /* 设置金额栏背景色为白色 */
     box-shadow: 0 2px 4px rgba(0,0,0,0.5); /* 添加容器阴影效果 */
     // background-color: #f2f2f2;
     font-weight: bold;
@@ -136,33 +134,33 @@
     margin: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #4CAF50;
+    background-color: rgba(84, 177, 157, 0.8);
     color: white;
     cursor: pointer;
   }
   
   #sellButton:hover {
-    background-color: #e95a50; /* 按钮鼠标悬停时的背景颜色 */
+    background-color: rgba(73, 141, 153, 0.8); /* 设置金额栏背景色为白色 */
     color: white; /* 按钮鼠标悬停时的文本颜色 */
   }
   
   #sellButton:active {
-    background-color: #c4372d; /* 按钮鼠标悬停时的背景颜色 */
+    background-color: rgba(38, 102, 110, 0.8); /* 设置金额栏背景色为白色 */
     color: white; /* 按钮鼠标悬停时的文本颜色 */
   }
   
   .sort-buttons {
-    background-color: rgba(228, 239, 255, 0.8); /* 设置金额栏背景色为白色 */
+    background-color: rgba(248, 255, 228, 0.8); /* 设置金额栏背景色为白色 */
     box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* 添加容器阴影效果 */
     border: none;
   }
 
   .sort-buttons:hover {
-    background-color: rgba(202, 180, 117, 0.8); /* 设置金额栏背景色为白色 */
+    background-color: rgba(255, 254, 196, 0.8); /* 设置金额栏背景色为白色 */
   }
 
   .sort-buttons:active {
-    background-color: rgba(141, 106, 61, 0.8); /* 设置金额栏背景色为白色 */
+    background-color: rgba(255, 185, 163, 0.8); /* 设置金额栏背景色为白色 */
   }
 
 
@@ -187,7 +185,7 @@
     margin-left: 10px;
     border: none;
     border-radius: 4px;
-    background-color: rgba(192, 146, 93, 0.8); /* 设置金额栏背景色为白色 */
+    background-color: rgba(84, 177, 157, 0.8); /* 设置金额栏背景色为白色 */
     color: white;
     font-size: 14px;
     cursor: pointer;
@@ -195,9 +193,9 @@
   }
   
   .searchButton:hover {
-    background-color: rgba(196, 104, 68, 0.8); /* 设置金额栏背景色为白色 */
+    background-color: rgba(73, 141, 153, 0.8); /* 设置金额栏背景色为白色 */
   }
 
   .searchButton:active {
-    background-color: rgba(128, 51, 28, 0.8); /* 设置金额栏背景色为白色 */
+    background-color: rgba(38, 102, 110, 0.8); /* 设置金额栏背景色为白色 */
   }
